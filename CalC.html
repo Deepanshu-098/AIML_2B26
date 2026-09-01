@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Management</h1>
+        <div class = "product-details"></div>
+         <p><strong>Product ID:</strong> <span id="productId"></span></p>
+            <p><strong>Product Name:</strong> <span id="productName"></span></p>
+            <p><strong>Price:</strong> ₹<span id="price"></span></p>
+            <p><strong>Quantity:</strong> <span id="quantity"></span></p>
+            <p><strong>Total Price:</strong> ₹<span id="totalPrice"></span></p>
+        </div>
+        <label for="newQuantity">Update Quantity</label>
+        <input type="number" id="newQuantity" min="1" placeholder="Enter new quantity">
+    
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account Management System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            width: 450px;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .account-details {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+        }
+
+        .account-details p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #message {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Bank Account Management</h1>
+
+        <div class="account-details">
+            <p><strong>Account Holder:</strong> <span id="holderName"></span></p>
+            <p><strong>Account Number:</strong> <span id="accountNumber"></span></p>
+            <p><strong>Account Balance:</strong> ₹<span id="balance"></span></p>
+        </div>
+
+        <label for="amount">Enter Amount:</label>
+        <input type="number" id="amount" min="1" placeholder="Enter amount">
+
+        <button onclick="depositAmount()">
+            Deposit
+        </button>
+
+        <button onclick="withdrawAmount()">
+            Withdraw
+        </button>
+
+        <button onclick="displayBalance()">
+            Display Current Balance
+        </button>
+
+        <div id="message"></div>
+    </div>
+
+    <script>
+        let bankAccount = {
+            accountHolderName: "Rahul Sharma",
+            accountNumber: "1234567890",
+            accountBalance: 10000,
+
+            deposit: function(amount) {
+                this.accountBalance += amount;
+            },
+
+            withdraw: function(amount) {
+                if (amount > this.accountBalance) {
+                    return "Insufficient Balance";
+                } else {
+                    this.accountBalance -= amount;
+                    return "Withdrawal Successful";
+                }
+            },
+
+            displayBalance: function() {
+                return this.accountBalance;
+            }
+        };
+
+        function displayAccountDetails() {
+            document.getElementById("holderName").textContent =
+                bankAccount.accountHolderName;
+
+            document.getElementById("accountNumber").textContent =
+                bankAccount.accountNumber;
+
+            document.getElementById("balance").textContent =
+                bankAccount.displayBalance();
+        }
+
+        function depositAmount() {
+            let amount = Number(document.getElementById("amount").value);
+
+            if (amount <= 0 || isNaN(amount)) {
+                showMessage("Please enter a valid amount.");
+                return;
+            }
+
+            bankAccount.deposit(amount);
+
+            displayAccountDetails();
+            showMessage("Amount Deposited Successfully");
+
+            document.getElementById("amount").value = "";
+        }
+
+        function withdrawAmount() {
+            let amount = Number(document.getElementById("amount").value);
+
+            if (amount <= 0 || isNaN(amount)) {
+                showMessage("Please enter a valid amount.");
+                return;
+            }
+
+            let result = bankAccount.withdraw(amount);
+
+            displayAccountDetails();
+            showMessage(result);
+
+            document.getElementById("amount").value = "";
+        }
+
+        function displayBalance() {
+            displayAccountDetails();
+            showMessage("Current Balance: ₹" + bankAccount.displayBalance());
+        }
+
+        function showMessage(message) {
+            let messageBox = document.getElementById("message");
+
+            messageBox.textContent = message;
+            messageBox.style.display = "block";
+        }
+
+        displayAccountDetails();
+    </script>
+
+</body>
+</html
