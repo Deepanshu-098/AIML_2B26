@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account Management System</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bank Account Management</h1>
+
+        <div class="account-details">
+            <p>Account Holder:<span id="holderName"></span></p>
+            <p>Account Number:<span id="accountNumber"></span></p>
+            <p>Account Balance:₹<span id="balance"></span></p>
+        </div>
+
+        <label for="amount">Enter Amount:</label>
+        <input type="number" id="amount" min="1" placeholder="Enter amount">
+
+        <button onclick="depositAmount()">
+            Deposit
+        </button>
+
+        <button onclick="withdrawAmount()">
+            Withdraw
+        </button>
+
+        <button onclick="displayBalance()">
+            Display Current Balance
+        </button>
+
+        <div id="message"></div>
+    </div>
+
+    <script>
+        let bankAccount = {
+            accountHolderName: "Deepanshu Singh",
+            accountNumber: "7895425180",
+            accountBalance: 19000,
+            deposit: function(amount) {
+                this.accountBalance +=amount;
+            },
+            withdraw: function(amount) {
+                if (amount > this.accountBalance) {
+                    return "Insufficient Balance";
+                } else {
+                    this.accountBalance -=amount;
+                    return "Withdrawal Successful";
+                }
+            },
+            displayBalance: function() {
+                return this.accountBalance;
+            }
+        };
+        function displayAccountDetails() {
+            document.getElementById("holderName").textContent =
+                bankAccount.accountHolderName;
+            document.getElementById("accountNumber").textContent =
+                bankAccount.accountNumber;
+            document.getElementById("balance").textContent =
+                bankAccount.displayBalance();
+        }
+        function depositAmount() {
+            let amount = Number(document.getElementById("amount").value);
+
+            if (amount <= 0 || isNaN(amount)) {
+                showMessage("Please enter a valid amount.");
+                return;
+            }
+
+            bankAccount.deposit(amount);
+            displayAccountDetails();
+            showMessage("Amount Deposited Successfully");
+
+            document.getElementById("amount").value = "";
+        }
+        function withdrawAmount() {
+            let amount = Number(document.getElementById("amount").value);
+
+            if (amount <= 0 || isNaN(amount)) {
+                showMessage("Please enter a valid amount.");
+                return;
+            }
+            let result = bankAccount.withdraw(amount);
+            displayAccountDetails();
+            showMessage(result);
+            document.getElementById("amount").value = "";
+        }
+        function displayBalance() {
+            displayAccountDetails();
+            showMessage("Current Balance: ₹" + bankAccount.displayBalance());
+        }
+        function showMessage(message) {
+            let messageBox = document.getElementById("message");
+            messageBox.textContent = message;
+            messageBox.style.display = "block";
+        }
+        displayAccountDetails();
+    </script>
+
+</body>
+</html
