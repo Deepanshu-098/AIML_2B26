@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping Product Management</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Management</h1>
+        <div class="product-details">
+            <p><strong>Product ID:</strong> <span id="productId"></span></p>
+            <p><strong>Product Name:</strong> <span id="productName"></span></p>
+            <p><strong>Price:</strong> ₹<span id="price"></span></p>
+            <p><strong>Quantity:</strong> <span id="quantity"></span></p>
+            <p><strong>Total Price:</strong> ₹<span id="totalPrice"></span></p>
+        </div>
+        <label for="newQuantity">Update Quantity:</label>
+        <input type="number" id="newQuantity" min="1" placeholder="Enter new quantity">
+        <button onclick="updateProductQuantity()">
+            Update Quantity
+        </button>
+        <button onclick="displayProductDetails()">
+            Display Product Details
+        </button>
+        <div id="output"></div>
+    </div>
+    <script>
+        let product = {
+            productId: 101,
+            productName: "Wireless Headphones",
+            price: 1500,
+            quantity: 2,
+            calculateTotalPrice: function() {
+                return this.price * this.quantity;
+            },
+            updateQuantity: function(newQuantity) {
+                this.quantity = newQuantity;
+            },
+            displayDetails: function() {
+                return `
+                    Product ID: ${this.productId}<br>
+                    Product Name: ${this.productName}<br>
+                    Price: ₹${this.price}<br>
+                    Quantity: ${this.quantity}<br>
+                    Total Price: ₹${this.calculateTotalPrice()}
+                `;
+            }
+        };
+        function displayProductDetails() {
+            document.getElementById("productId").textContent =
+                product.productId;
+            document.getElementById("productName").textContent =
+                product.productName;
+            document.getElementById("price").textContent =
+                product.price;
+            document.getElementById("quantity").textContent =
+                product.quantity;
+            document.getElementById("totalPrice").textContent =
+                product.calculateTotalPrice();
+            document.getElementById("output").style.display = "block";
+            document.getElementById("output").innerHTML =
+                "<strong>Complete Product Details:</strong><br><br>" +
+                product.displayDetails();
+        }
+        function updateProductQuantity() {
+            let newQuantity =
+                document.getElementById("newQuantity").value;
+            if (newQuantity === "" || newQuantity <= 0) {
+                alert("Please enter a valid quantity.");
+                return;
+            }
+            product.updateQuantity(Number(newQuantity));
+            displayProductDetails();
+            document.getElementById("newQuantity").value = "";
+        }
+        displayProductDetails();
+    </script>
+</body>
+</html>
