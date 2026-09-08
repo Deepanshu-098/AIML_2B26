@@ -1,0 +1,31 @@
+<!-- write a simple html page and javascript code to use spread operator in JavaScript. The page should have a button that, when clicked, will display the contents of an array using the spread operator. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread Operator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Spread Operator</h1>
+    </div>
+    <script>
+        function sum(name, rollno, ...values) {
+    let total = 0;
+    for (let value of values) {
+        total += value;
+    }
+    console.log("Name:", name);
+    console.log("Roll No:", rollno);
+    console.log("Sum:", total);
+}
+sum("Deepanshu", 10, 20, 30, 40);
+sum("Deepanshu", 7563853, 10, 20, 30, 40, 50);
+let arr = [10, 20, 30, 40];
+sum("Deepanshu", 7603096, ...arr);
+arr.push(60);
+console.log(arr);
+</script>
+</body>
+</html>
