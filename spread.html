@@ -11,7 +11,7 @@
         <h1>Spread Operator</h1>
     </div>
     <script>
-        function sum(name, rollno, ...values) {
+    function sum(name, rollno, ...values) {
     let total = 0;
     for (let value of values) {
         total += value;
@@ -20,6 +20,7 @@
     console.log("Roll No:", rollno);
     console.log("Sum:", total);
 }
+parseInt(prompt())
 sum("Deepanshu", 10, 20, 30, 40);
 sum("Deepanshu", 7563853, 10, 20, 30, 40, 50);
 let arr = [10, 20, 30, 40];
