@@ -1,3 +1,4 @@
+// Experiment 2
 class BankAccount {
     constructor(accountNo, holderName, balance) {
         this.accountNo = accountNo;
