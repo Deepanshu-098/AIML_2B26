@@ -1,3 +1,4 @@
+// Experiment 4
 class Product {
     constructor(productId, productName, price) {
         this.productId = productId;
